@@ -3,11 +3,16 @@ import TextField from '@material-ui/core/TextField'
 import Button from '@material-ui/core/Button';
 import { NavLink, Redirect } from 'react-router-dom';
 import './Login.css'
+
+import avatar from './avatar.png'
+import lock from './lock.png'
+=======
 import users from '../file.json'
 import Cookies from 'universal-cookie';
 
 
 const cookies = new Cookies()
+
 
 
 class Login extends Component {
@@ -69,15 +74,23 @@ class Login extends Component {
 			
 				<p> Hello, I'm Login </p>
 				<form noValidate autoComplete="off" className='login'>
+					<div> 
+					<img src={avatar} alt="Logo" className='avatar' />
 					<TextField
 						id="filled-name-input"
 						label="Name"
 						margin="normal"
 						variant="filled"
+
+					/>
+					</div>
+					<div>
+					<img src={lock} alt="Lock" className='lock' />
+=======
 						onChange={this.compareName}
 						value={this.state.name}
 					/> 
-						
+
 					<TextField
 						id="filled-password-input"
 						label="password"
@@ -88,6 +101,7 @@ class Login extends Component {
 						onChange={this.comparePassword}
 						value={this.state.password}
 					/>
+					</div>
 				 </form>
 				<button type='submit' onClick={this.findData}> Sign In </button>	 
 			 <Button variant="contained" href="#contained-buttons" > <NavLink to='/registration'>Sign Up</NavLink> </Button>
