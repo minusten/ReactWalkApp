@@ -6,7 +6,6 @@ import './Login.css'
 
 import avatar from './avatar.png'
 import lock from './lock.png'
-=======
 import users from '../file.json'
 import Cookies from 'universal-cookie';
 
@@ -63,6 +62,7 @@ class Login extends Component {
 		
 		} 	
 	}
+
 	
    render () {
 		if (this.state.logedIn) {
@@ -70,27 +70,26 @@ class Login extends Component {
 		}
 		
     return(
-			<div> 
-			
-				<p> Hello, I'm Login </p>
-				<form noValidate autoComplete="off" className='login'>
-					<div> 
+		
+
+			<div  className='login'> 
+				<p> LOGIN </p>
+				<form noValidate autoComplete="off">
+					<div className='name'> 
 					<img src={avatar} alt="Logo" className='avatar' />
 					<TextField
 						id="filled-name-input"
 						label="Name"
 						margin="normal"
 						variant="filled"
-
-					/>
-					</div>
-					<div>
-					<img src={lock} alt="Lock" className='lock' />
-=======
 						onChange={this.compareName}
 						value={this.state.name}
-					/> 
+					
+					/>
+					</div>
 
+					<div className='password'>
+					<img src={lock} alt="Lock" className='lock' />
 					<TextField
 						id="filled-password-input"
 						label="password"
@@ -100,13 +99,17 @@ class Login extends Component {
 						variant="filled"
 						onChange={this.comparePassword}
 						value={this.state.password}
+						className='text-field'
 					/>
 					</div>
 				 </form>
-				<button type='submit' onClick={this.findData}> Sign In </button>	 
-			 <Button variant="contained" href="#contained-buttons" > <NavLink to='/registration'>Sign Up</NavLink> </Button>
-			  
-			</div>
+				 
+				 <div className='button'> 
+				 <Button className='but' variant="outlined" href="#contained-buttons" size="small" onClick={this.findData}> Sign In </Button>	 
+			 	 <Button variant="outlined" href="#contained-buttons" size="small" > <NavLink to='/registration' className='link'>Sign Up</NavLink> </Button>
+			  	 </div>
+				</div>
+			
     )
    }
 }

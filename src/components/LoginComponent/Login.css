@@ -1,14 +1,42 @@
 .login {
-    display: flex;
-    flex-direction: column;
+    margin-top: 10%;
 }
 
+
        
-.avatar {
+.name {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+   
+}
+.password  {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+.name img {
+    margin-right: 15px;
+    display: block;
     height: 15px;
     width: 15px;
 }
-.lock  {
+.password img {
+    margin-right: 15px;
+    display: block;
     height: 15px;
     width: 15px;
+}
+.button {
+    display: flex;
+    justify-content: space-between;
+    width: 15%;
+    margin: 0 auto;
+    margin-left: 43.7%;
+}
+
+.link {
+    text-decoration: none;
+    color:black
 }
