@@ -3,11 +3,25 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
-import { BrowserRouter } from 'react-router-dom';
+import { BrowserRouter, Switch } from 'react-router-dom';
+import { store } from './store'
+import { Provider } from 'react-redux'
+
+
+
+
 
 ReactDOM.render(
-   <BrowserRouter>  <App /> </BrowserRouter>
-  
+    <Provider store={store}>
+    <BrowserRouter>
+    <Switch>
+   
+    <App /> 
+    
+    </Switch>
+    </BrowserRouter>
+    </Provider>
+
     , document.getElementById('root'));
 
 
