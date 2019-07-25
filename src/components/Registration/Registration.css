@@ -1,4 +1,14 @@
+
 .regist {
     display: flex;
     flex-direction: column;
+    align-items: center;
+    justify-content: center;
+   
+       
+}
+.link {
+    text-decoration: none;
+    color:black;
+    cursor: pointer;
 }

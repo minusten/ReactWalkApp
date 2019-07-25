@@ -2,7 +2,7 @@ import React, {Component} from 'react'
 import TextField from '@material-ui/core/TextField'
 import Button from '@material-ui/core/Button';
 import { NavLink, Redirect } from 'react-router-dom';
-import './Login.css'
+import './Login.css';
 
 import avatar from './avatar.png'
 import lock from './lock.png'
@@ -25,9 +25,44 @@ class Login extends Component {
 			password: '',
 			status: true,
 			cookiesSaved: false,
-			logedIn: false
+			logedIn: false,
+			fields: {},
+			nameError: false,
+			passwordError:false
 		}
 	}
+	validateName = (e) => {
+		
+		  if(this.state.name === ''){
+			this.setState({
+			 nameError: true 
+			  })
+			// return  <p className='errName'> Введите имя </p>
+			alert('Введите имя')
+			} else {
+			this.setState({
+			    nameError: false,     
+				name: e.target.value
+			})
+			console.log('good')
+		  }
+		
+	}
+	validatePass = (e) => { 
+		  if(this.state.password===''){
+			this.setState({
+			  passwordError: true
+			})
+			alert('Введите пароль')
+		  } else {
+			this.setState({
+			  passwordError: false,
+			  password: e.target.value
+			})
+		  }
+	   }
+
+	
 	componentDidMount () {
 
 		var status = cookies.get('loginStatus')
@@ -74,7 +109,7 @@ class Login extends Component {
 
 			<div  className='login'> 
 				<p> LOGIN </p>
-				<form noValidate autoComplete="off">
+				<form Validate autoComplete="on">
 					<div className='name'> 
 					<img src={avatar} alt="Logo" className='avatar' />
 					<TextField
@@ -82,10 +117,13 @@ class Login extends Component {
 						label="Name"
 						margin="normal"
 						variant="filled"
+						name="name"
 						onChange={this.compareName}
 						value={this.state.name}
+						onBlur={this.validateName}
 					
 					/>
+					<span style={{color: "red"}}>{this.state.nameError["name"]}</span>
 					</div>
 
 					<div className='password'>
@@ -97,17 +135,21 @@ class Login extends Component {
 						autoComplete="current-password"
 						margin="normal"
 						variant="filled"
+						name="password"
 						onChange={this.comparePassword}
 						value={this.state.password}
 						className='text-field'
+						onBlur={this.validatePass}
 					/>
 					</div>
 				 </form>
 				 
+				 
 				 <div className='button'> 
-				 <Button className='but' variant="outlined" href="#contained-buttons" size="small" onClick={this.findData}> Sign In </Button>	 
-			 	 <Button variant="outlined" href="#contained-buttons" size="small" > <NavLink to='/registration' className='link'>Sign Up</NavLink> </Button>
+				 <Button className='but' variant="outlined"  size="small" onClick={this.findData} > Sign In </Button>	 
+			 	 <Button variant="outlined"  size="small" > <NavLink to='/registration' className='link'>Sign Up</NavLink> </Button>
 			  	 </div>
+				{/* <input type='checkbox' />  <p> Remember me </p> */}
 				</div>
 			
     )
