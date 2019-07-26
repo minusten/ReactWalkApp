@@ -1,0 +1,43 @@
+.registerForm {
+    height: 410px;
+    width: 420px;
+    background-color: rgba(255, 255, 255, 0.363);
+    margin: 0 auto;
+    border-radius: 20px;
+    border: white 1px solid;
+    
+    white-space: break-spaces;
+    
+
+}
+
+
+.mainWrap {
+  height: 600px;
+    margin: 0 auto;
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  resize: both;
+  overflow: auto;
+    
+}
+.MuiFormControl-root {
+  
+    width: 400px;
+}
+.MuiButton-contained {
+    margin: 20px !important;
+    display: flex;
+    justify-content: center;
+    align-items: center
+}
+.MuiButton-containedPrimary {
+    color: #fff;
+    background-color: #40b53f !important;
+}
+
+h2 {
+    color: rgba(11, 80, 76, 0.5);
+}

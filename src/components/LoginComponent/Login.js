@@ -4,31 +4,32 @@ import Button from '@material-ui/core/Button';
 import { NavLink, Redirect } from 'react-router-dom';
 import './Login.css';
 
-import avatar from './avatar.png'
-import lock from './lock.png'
+import avatar from '../../assets/images/avatar.png'
+import lock from '../../assets/images/lock.png'
 import users from '../file.json'
 import Cookies from 'universal-cookie';
+import axios from 'axios'
 
 
 const cookies = new Cookies()
 
 
-
 class Login extends Component {
-
+	
 	constructor(props){
 		
 		super(props)
 		this.state = {
 			db: JSON.parse(JSON.stringify(users)),
-			name: '',
+			email: '',
 			password: '',
 			status: true,
 			cookiesSaved: false,
 			logedIn: false,
 			fields: {},
 			nameError: false,
-			passwordError:false
+			passwordError:false,
+			users: []
 		}
 	}
 	validateName = (e) => {
@@ -37,12 +38,11 @@ class Login extends Component {
 			this.setState({
 			 nameError: true 
 			  })
-			// return  <p className='errName'> Введите имя </p>
 			alert('Введите имя')
 			} else {
 			this.setState({
 			    nameError: false,     
-				name: e.target.value
+				email: e.target.value
 			})
 			console.log('good')
 		  }
@@ -63,26 +63,17 @@ class Login extends Component {
 	   }
 
 	
-	componentDidMount () {
-
-		var status = cookies.get('loginStatus')
-		if (status === 'true') {
-			
-			this.setState({logedIn:true})
-			console.log('sdfsdf')
-		}
-	}
 
 	
 	compareName = (e) => {
-		this.setState({name: e.target.value })
+		this.setState({email: e.target.value })
 	}
 	comparePassword = (e) => {
 		this.setState({password: e.target.value})
 	}
 	findData = () => {
 		this.state.db.forEach((data, index) => {
-			if (data.name === this.state.name && data.password === this.state.password) {
+			if (data.email === this.state.email && data.password === this.state.password) {
 				this.setState({logedIn: true})
 				console.log('Successful login')
 
@@ -97,16 +88,28 @@ class Login extends Component {
 		
 		} 	
 	}
-
+		
+	getUser = () => { 
+				const url = `http://10.0.4.20:3006/users`;
+				axios.get(url).then(response => response.data)
+				.then((data) => {
+				  console.log(data)
+				  this.props.history.push('/home')
+				 })
+			  }
+		
+	
+	  
 	
    render () {
 		if (this.state.logedIn) {
 			return <Redirect to ='/' />
 		}
-		
+	
     return(
 		
-
+			<div className='loginWrap'> 
+			   
 			<div  className='login'> 
 				<p> LOGIN </p>
 				<form Validate autoComplete="on">
@@ -114,10 +117,10 @@ class Login extends Component {
 					<img src={avatar} alt="Logo" className='avatar' />
 					<TextField
 						id="filled-name-input"
-						label="Name"
+						label="E-mail"
 						margin="normal"
 						variant="filled"
-						name="name"
+						name="e-mail"
 						onChange={this.compareName}
 						value={this.state.name}
 						onBlur={this.validateName}
@@ -146,10 +149,11 @@ class Login extends Component {
 				 
 				 
 				 <div className='button'> 
-				 <Button className='but' variant="outlined"  size="small" onClick={this.findData} > Sign In </Button>	 
+				 <Button className='but' variant="outlined"  size="small" onClick={this.getUser} > Sign In </Button>	 
 			 	 <Button variant="outlined"  size="small" > <NavLink to='/registration' className='link'>Sign Up</NavLink> </Button>
 			  	 </div>
-				{/* <input type='checkbox' />  <p> Remember me </p> */}
+			
+				</div>
 				</div>
 			
     )
