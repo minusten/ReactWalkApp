@@ -1,9 +1,15 @@
 import React from 'react';
 import Button from '@material-ui/core/Button';
 import { ValidatorForm, TextValidator } from 'react-material-ui-form-validator';
+import {NavLink} from 'react-router-dom'
 import axios from 'axios'
+import './Register.css'
+import Cookies from 'universal-cookie';
 
-export default class Register extends React.Component {
+const cookies = new Cookies()
+
+ class Register extends React.Component {
+   
     state = {
         formData: {
             firstName: '',
@@ -12,6 +18,8 @@ export default class Register extends React.Component {
             password: ''
         },
         submitted: false,
+        cookiesSaved: false,
+        status: true
     }
 
     validFieldChange = (e) => {
@@ -27,12 +35,17 @@ export default class Register extends React.Component {
             console.log(res);
             this.props.history.push('/login')
           })
+          this.setState({cookiesSaved: cookies.set('registerStatus', this.state.status)}) 
+		    console.log('Saved', !this.state.cookiesSaved)
       }
-
+   
     render() {
         const { formData, submitted } = this.state;
-
+       
         return (
+            <div className='mainWrap'>
+            <div className='formWrap'> 
+            <div className='registerForm'> 
             <ValidatorForm
                 ref="form"
                 onSubmit={this.handleSubmit}
@@ -41,7 +54,7 @@ export default class Register extends React.Component {
                 <TextValidator
                     label="First Name"
                     onChange={this.validFieldChange}
-                    name="firstName"
+                    name={this.props.firstName}
                     value={formData.firstName}
                     validators={['required']}
                     errorMessages={['this field is required']}
@@ -76,12 +89,11 @@ export default class Register extends React.Component {
                 />
                 <br />
                 <Button
-                   
+                    className='buttonSubmit'
                     onClick={this.handlePost}
                     color="primary"
                     variant="contained"
-                    type="submit"
-                   
+                    type="submit" 
                 >  
                
                     {
@@ -92,6 +104,13 @@ export default class Register extends React.Component {
                 </Button>
               
             </ValidatorForm>
+            </div>
+          
+            <NavLink to='/login'>   <p> У вас уже есть аккаунт? </p>  </NavLink>
+             </div>
+            </div>
         );
     }
 }
+
+export default (Register);

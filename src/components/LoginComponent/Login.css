@@ -1,7 +1,26 @@
 .login {
     margin-top: 10%;
+    color: rgba(11, 80, 76, 0.5);
+    font-size: 1.5em;
+    font-weight: bold;
+    height: 350px;
+    width: 470px;
+    background-color: rgba(255, 255, 255, 0.363);
+    border-radius: 20px;
+    border: white 1px solid;
+    margin: 0 auto;
+   
 }
-
+.loginWrap {
+    height: 600px;
+    margin: 0 auto;
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  resize: both;
+  overflow: auto;
+}
 
        
 .name {
@@ -30,18 +49,31 @@
 }
 .button {
     display: flex;
-    justify-content: space-between;
-    width: 15%;
+    justify-content: space-around;
+    width: 80%;
     margin: 0 auto;
-    margin-left: 43.7%;
-    color: white;
+    padding-top: 30px;
+    
+  
 }
 
 .link {
     text-decoration: none;
-    color:black
+    color:black;
+    
 }
 
 .errName {
     color: red
+}
+.MuiButton-root {
+    width: 80px !important;
+    background-color: rgb(25, 212, 25) !important
+}
+.MuiButton-root:hover {
+    background-color: rgb(170, 230, 170) !important
+}
+.but2 {
+    width: 80px !important;
+    background-color: #ffff00
 }

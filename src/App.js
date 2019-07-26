@@ -1,46 +1,44 @@
 import React, {Component} from 'react';
-import './App.css';
-import Registration from './components/Registration/Registration';
+import './App.css'
 import Login from './components/LoginComponent/Login';
 import {Switch, Route} from 'react-router-dom'
 import Home from './components/HomeComponent/Home';
 import { CookiesProvider } from 'react-cookie';
-import { connect } from 'react-redux'
 import Register from './components/Registration/Register'
-
+import {connect} from 'react-redux'
+import {usersFetchData} from './actions/users'
 
 
 class App extends Component {
-  constructor(props) {
-    super(props)
-    this.state ={
-     authed: false
-    }
-  
-  }
+  componentDidMount = () => {
+    this.props.fetchData('http://10.0.4.20:3006/users')
+}
   render() {
-    const {  login, home, registration } = this.props
     return (
       <CookiesProvider> 
-      <div className="App">
+        <div className="App">
         <Switch>
-          <Route exact path="/login"  component={Login} value={login.value}/>
-          <Route path='/registration' component={Register} value={registration.value}/>
-          <Route exact path='/' component={Home} value={home.value}/>
+          <Route exact path="/login"  component={Login} />
+          <Route path='/registration' component={Register} />
+          <Route exact path='/' component={Home} />
         </Switch>
       </div>
       </CookiesProvider>
-    );
+     
+    )
   }
   
 }
-const mapStateToProps = store  => {
-  console.log(store) 
+const mapStateToProps = (state) => {
   return {
-    login: store.login,
-    home:store.home,
-    registration: store.registration
+    users: state.users
   }
 }
 
-export default connect(mapStateToProps)(App)
+const mapDispatchToProps = dispatch => {
+  return {
+    fetchData: url => dispatch(usersFetchData(url))
+  }
+}
+console.log('App')
+export default connect(mapStateToProps, mapDispatchToProps)(App);
