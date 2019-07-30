@@ -2,8 +2,8 @@ import React, {Component} from 'react'
 import TextField from '@material-ui/core/TextField'
 import Button from '@material-ui/core/Button';
 import { NavLink, Redirect } from 'react-router-dom';
-import './Login.css';
-
+import './index.css';
+import PropTypes from 'prop-types'
 import avatar from '../../assets/images/avatar.png'
 import lock from '../../assets/images/lock.png'
 import users from '../file.json'
@@ -94,7 +94,7 @@ class Login extends Component {
 				axios.get(url).then(response => response.data)
 				.then((data) => {
 				  console.log(data)
-				  this.props.history.push('/home')
+				  this.props.history.push('/')
 				 })
 			  }
 		
@@ -159,4 +159,15 @@ class Login extends Component {
     )
    }
 }
+	Login.propTypes = {
+	value: PropTypes.number.isRequired,
+	increment: PropTypes.func.isRequired,
+	decrement: PropTypes.func.isRequired
+  }
+  
+ 	 Login.defaultProps = {
+	value: 0,
+	increment: () => {},
+	decrement: () => {}
+  }
 export default Login
