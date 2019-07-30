@@ -1,12 +1,12 @@
-import React, {Component} from 'react';
+import React, {Component} from 'react'
 import './App.css'
-import Login from './components/LoginComponent/Login';
 import {Switch, Route} from 'react-router-dom'
-import Home from './components/HomeComponent/Home';
-import { CookiesProvider } from 'react-cookie';
-import Register from './components/Registration/Register'
+import { CookiesProvider } from 'react-cookie'
 import {connect} from 'react-redux'
 import {usersFetchData} from './actions/users'
+import indexRegisterContainer from './components/RegisterComponent/indexContainer'
+import indexLoginContainer from './components/LoginComponent/indexContainer'
+import indexHomeContainer from './components/HomeComponent/indexContainer'
 
 
 class App extends Component {
@@ -18,9 +18,9 @@ class App extends Component {
       <CookiesProvider> 
         <div className="App">
         <Switch>
-          <Route exact path="/login"  component={Login} />
-          <Route path='/registration' component={Register} />
-          <Route exact path='/' component={Home} />
+          <Route exact path="/login"  component={indexLoginContainer} />
+          <Route path='/registration' component={indexRegisterContainer} />
+          <Route exact path='/' component={indexHomeContainer} />
         </Switch>
       </div>
       </CookiesProvider>

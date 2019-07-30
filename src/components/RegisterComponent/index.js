@@ -3,7 +3,7 @@ import Button from '@material-ui/core/Button';
 import { ValidatorForm, TextValidator } from 'react-material-ui-form-validator';
 import {NavLink} from 'react-router-dom'
 import axios from 'axios'
-import './Register.css'
+import './index.css'
 import Cookies from 'universal-cookie';
 
 const cookies = new Cookies()
@@ -25,7 +25,7 @@ const cookies = new Cookies()
     validFieldChange = (e) => {
         const { formData } = this.state;
         formData[e.target.name] = e.target.value;
-        this.setState({ formData });
+        this.props.myCustomPropsFunc(e.target.name, e.target.value, 'main')
     }
 
     handlePost = () => {
@@ -40,8 +40,8 @@ const cookies = new Cookies()
       }
    
     render() {
-        const { formData, submitted } = this.state;
-       
+        const { submitted } = this.state;
+       console.log(this.props)
         return (
             <div className='mainWrap'>
             <div className='formWrap'> 
@@ -54,8 +54,8 @@ const cookies = new Cookies()
                 <TextValidator
                     label="First Name"
                     onChange={this.validFieldChange}
-                    name={this.props.firstName}
-                    value={formData.firstName}
+                    name='firstName'
+                    value={this.props.firstName}
                     validators={['required']}
                     errorMessages={['this field is required']}
                   
@@ -65,7 +65,7 @@ const cookies = new Cookies()
                     label="Last Name"
                     onChange={this.validFieldChange}
                     name="lastName"
-                    value={formData.lastName}
+                    value={this.props.lastName}
                     validators={['required']}
                     errorMessages={['this field is required']}
                 />
@@ -74,7 +74,7 @@ const cookies = new Cookies()
                     label="Email"
                     onChange={this.validFieldChange}
                     name="email"
-                    value={formData.email}
+                    value={this.props.email}
                     validators={['required', 'isEmail']}
                     errorMessages={['this field is required', 'email is not valid']}
                 />
@@ -83,7 +83,7 @@ const cookies = new Cookies()
                     label="Password"
                     onChange={this.validFieldChange}
                     name="password"
-                    value={formData.password}
+                    value={this.props.password}
                     validators={['required']}
                     errorMessages={['this field is required']}
                 />
@@ -107,10 +107,11 @@ const cookies = new Cookies()
             </div>
           
             <NavLink to='/login'>   <p> У вас уже есть аккаунт? </p>  </NavLink>
+           
              </div>
             </div>
         );
     }
 }
 
-export default (Register);
+export default Register
