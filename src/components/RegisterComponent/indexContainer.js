@@ -3,8 +3,7 @@ import { bindActionCreators } from 'redux'
 import { changeStateProp } from '../../actions'
 import Register from './index'
 
-
-const mapStateToProps = ({main: {value, firstName, lastName, email, password}}) => {
+const mapStateToProps = ({ main: { value, firstName, lastName, email, password } }) => {
   return {
     value,
     firstName,
@@ -13,19 +12,15 @@ const mapStateToProps = ({main: {value, firstName, lastName, email, password}}) 
     password
   }
 }
-
 const mapDispatchToProps = (dispatch) => {
   return {
-    // bind actions with dispatch
-    ...bindActionCreators({changeStateProp}, dispatch),
-    // example that we can add our custom funcs to props
+    ...bindActionCreators({ changeStateProp }, dispatch),
     myCustomPropsFunc: function (prop, value, reducer) {
       changeStateProp(prop, value, reducer)(dispatch)
       return null
     }
   }
 }
-
 const indexRegisterContainer = connect(
   mapStateToProps,
   mapDispatchToProps

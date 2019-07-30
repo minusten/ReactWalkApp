@@ -1,29 +1,28 @@
 import {
-    applyMiddleware,
-    compose,
-    createStore
-  } from 'redux'
-  import thunk from 'redux-thunk'
-  import { persistCombineReducers } from 'redux-persist'
-  import storage from 'redux-persist/lib/storage' 
-  import reducers from './reducers'
-  
-  const config = {
-    key: 'primary',
-    storage
-  }
-  
-  let reducer = persistCombineReducers(config, reducers)
-  
-  const store = createStore(
-    reducer,
-    undefined,
-    compose(
-      applyMiddleware(...[thunk])
-    )
+  applyMiddleware,
+  compose,
+  createStore
+} from 'redux'
+import thunk from 'redux-thunk'
+import { persistCombineReducers } from 'redux-persist'
+import storage from 'redux-persist/lib/storage'
+import reducers from './reducers'
+
+const config = {
+  key: 'primary',
+  storage
+}
+
+const reducer = persistCombineReducers(config, reducers)
+
+const store = createStore(
+  reducer,
+  undefined,
+  compose(
+    applyMiddleware(...[thunk])
   )
+)
 
-  console.log( storage)
+console.log(storage)
 
-
-  export default store
+export default store

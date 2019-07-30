@@ -1,9 +1,6 @@
 import React, {Component} from 'react'
-import { NavLink } from 'react-router-dom';
-import Cookies from 'universal-cookie';
-import Map from './map'
-
-  
+import { NavLink } from 'react-router-dom'
+import Cookies from 'universal-cookie'
 
 const cookies = new Cookies()
 
@@ -22,15 +19,10 @@ class Home extends Component {
 
     }
     
-    render() {
-        
+    render() {      
         return(
-            
             <div> 
-                
                 <h1> HOME PAGE </h1> 
-                
-                {/* <button onClick={alert('Вы уже в системе')}> Log In </button>	 */}
                 <button onClick={this.funcLogOut}> <NavLink to ='/login'> LogOut </NavLink> </button>
             </div>
         )
