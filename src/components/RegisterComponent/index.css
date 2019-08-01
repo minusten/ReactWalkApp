@@ -1,14 +1,15 @@
 .registerForm {
-    height: 410px;
-    width: 420px;
-    background-color: rgba(255, 255, 255, 0.363);
-    margin: 0 auto;
+    font-weight: 200;
+    color: #1f281d;
+    margin-top: 10%;
+    font-size: 1.5em;
+    font-weight: bold;
+    height: 350px;
+    width: 470px;
+    background-color: rgba(244, 207, 174, 0.82);
     border-radius: 20px;
     border: white 1px solid;
-    
-    white-space: break-spaces;
-    
-
+    margin: 0 auto;
 }
 
 
@@ -34,7 +35,7 @@
     align-items: center
 }
 .MuiButton-containedPrimary {
-    color: #fff;
+    color:#e8cdb0;
     background-color: #40b53f !important;
 }
 

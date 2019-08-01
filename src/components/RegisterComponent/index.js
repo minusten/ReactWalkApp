@@ -18,7 +18,8 @@ class Register extends Component {
     },
     submitted: false,
     cookiesSaved: false,
-    status: true
+    status: true,
+    
   }
   validFieldChange = (e) => {
     const { formData } = this.state;
@@ -37,6 +38,7 @@ class Register extends Component {
     console.log('Saved', !this.state.cookiesSaved)
   }
   render() {
+    
     const { submitted } = this.state;
     console.log(this.props)
     return (

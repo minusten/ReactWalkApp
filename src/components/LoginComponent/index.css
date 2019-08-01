@@ -1,11 +1,12 @@
 .login {
+  font-weight: 200;
+  color: #1f281d;
   margin-top: 10%;
-  color: rgba(11, 80, 76, 0.5);
   font-size: 1.5em;
   font-weight: bold;
-  height: 350px;
+  height: 250px;
   width: 470px;
-  background-color: rgba(255, 255, 255, 0.363);
+  background-color: rgba(244, 207, 174, 0.82);
   border-radius: 20px;
   border: white 1px solid;
   margin: 0 auto;
@@ -52,6 +53,7 @@
     width: 80%;
     margin: 0 auto;
     padding-top: 30px;
+    text-decoration: none;
     
   
 }
@@ -67,10 +69,11 @@
 }
 .MuiButton-root {
     width: 80px !important;
-    background-color: rgb(25, 212, 25) !important
+    background-color:#e8cdb0 !important
 }
 .MuiButton-root:hover {
-    background-color: rgb(170, 230, 170) !important
+  background-color: #e3d43f !important;
+  border-bottom-color: green !important;
 }
 .but2 {
     width: 80px !important;
