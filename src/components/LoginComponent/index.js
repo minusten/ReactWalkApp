@@ -1,13 +1,14 @@
 import React, { Component } from 'react'
 import { ValidatorForm, TextValidator } from 'react-material-ui-form-validator';
 import Button from '@material-ui/core/Button';
-import { NavLink, Redirect } from 'react-router-dom';
+import { NavLink} from 'react-router-dom';
 import './index.css';
 import avatar from '../../assets/images/avatar.png'
 import lock from '../../assets/images/lock.png'
 import users from '../file.json'
-import Cookies from 'universal-cookie';
+import Cookies from 'universal-cookie'
 import axios from 'axios'
+import {API_URL} from '../../config'
 
 const cookies = new Cookies()
 
@@ -24,7 +25,8 @@ class Login extends Component {
     fields: {},
     nameError: false,
     passwordError: false,
-    users: []
+    users: [],
+    token: ''
   }
   changeFields = (e) => {
     const { formData } = this.state;
@@ -32,35 +34,27 @@ class Login extends Component {
     this.setState({ formData })
     console.log(this.state)
   }
-  findData = () => {
-    this.state.db.forEach((data, index) => {
-      if (data.email === this.state.email && data.password === this.state.password) {
-        this.setState({ logedIn: true })
-        console.log('Successful login')
-      }
-    })
-    this.setState({ cookiesSaved: cookies.set('loginStatus', !this.state.status) })
-    if (this.state.logedIn) {
-      this.setState({ logenIn: !this.state.logedIn })
-      return this.props.history.push('/login')
-    }
-  }
-  login = () => {
+ 
+
+  login = (response) => {
     console.log('sdfsd')
-    console.log(this.state)
-    const url = `http://10.0.4.20:3006/login`
-    axios.post(url, { user: { email: this.state.formData.email, password: this.state.formData.password } })
+    console.log(API_URL)
+
+    axios.post(`${API_URL}/login`, { user: { email: this.state.formData.email, password: this.state.formData.password } })
       .then((response) => {
         console.log(response)
         cookies.set('token', response.data.user.token)
         this.props.history.push('/')
       })
-
+  }
+  componentDidMount() {  
+    if (cookies.get('token')) {
+     return this.props.history.push('/')
+    }
+   
   }
   render() {
-    if (this.state.logedIn) {
-      return <Redirect to='/' />
-    }
+  
     return (
       <div className='loginWrap'>
         <div className='login'>

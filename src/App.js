@@ -7,7 +7,9 @@ import { usersFetchData } from './actions/users'
 import indexRegisterContainer from './components/RegisterComponent/indexContainer'
 import indexLoginContainer from './components/LoginComponent/indexContainer'
 import indexHomeContainer from './components/HomeComponent/indexContainer'
-
+import indexUserContainer from './components/UserComponent/indexContainer'
+import indexRoutesContainer from './components/RoutesComponent/indexContainer'
+import indexAddRouteContainer from './components/AddRouteComponent/indexContainer'
 
 class App extends Component {
   componentDidMount = () => {
@@ -17,9 +19,13 @@ class App extends Component {
     return (
       <CookiesProvider>
         <div className="App">
+          safasfasfasfasfas
           <Switch>
             <Route exact path="/login" component={indexLoginContainer} />
             <Route path='/registration' component={indexRegisterContainer} />
+            <Route path='/user' component={indexUserContainer} />
+            <Route path='/routes' component={indexRoutesContainer} />
+            <Route path='/add' component={indexAddRouteContainer} />
             <Route exact path='/' component={indexHomeContainer} />
           </Switch>
         </div>
