@@ -1,5 +1,4 @@
-.home {
-    
+.addRoute {
     background-image: url('../../assets/images/back4.jpg'); 
     background-size: cover;
     background-repeat: no-repeat;
@@ -11,4 +10,9 @@
     bottom: 0;
     left: 0;
     z-index: 0;
+}
+.add-content {
+    z-index: 1;
+    padding-top: 100px;
+    color:black
 }

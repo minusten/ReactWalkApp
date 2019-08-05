@@ -4,9 +4,7 @@ import { ValidatorForm, TextValidator } from 'react-material-ui-form-validator';
 import { NavLink } from 'react-router-dom'
 import axios from 'axios'
 import './index.css'
-import Cookies from 'universal-cookie';
 
-const cookies = new Cookies()
 
 class Register extends Component {
   state = {
@@ -34,8 +32,7 @@ class Register extends Component {
         console.log(res);
         this.props.history.push('/login')
       })
-    this.setState({ cookiesSaved: cookies.set('registerStatus', this.state.status) })
-    console.log('Saved', !this.state.cookiesSaved)
+
   }
   render() {
     

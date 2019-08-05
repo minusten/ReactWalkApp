@@ -20,6 +20,8 @@
   align-items: center;
   resize: both;
   overflow: auto;
+  background-image: url('../../assets/images/back4.jpg'); 
+  background-size: cover;
 }
 
        

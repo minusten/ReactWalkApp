@@ -1,23 +1,54 @@
 import React, { Component } from 'react'
+import './index.css'
+import edit from '../../assets/images/edit.png'
+import addImage from '../../assets/images/add-image.png'
+
 
 class UserComponent extends Component {
-  constructor(props) {
+  constructor (props) {
     super(props)
     this.state = {
-      value: ''
+      value: '',
+      firstName: '',
+      lastName: '',
+      files: false
     }
   }
-  goToHome = () => {
-    this.props.history.push('/')
+
+saveAvatar = () => { 
+  document.querySelector("input").addEventListener("change", this.uploadFile)
+}
+uploadFile = () => {
+  if (document.querySelector("input").files[0]) {
+    var fr = new FileReader();
+    fr.addEventListener("load", function () {
+      document.querySelector("label").style.backgroundImage = "url(" + fr.result + ")";
+    }, false);
+    fr.readAsDataURL(document.querySelector("input").files[0])
+    this.setState({
+      files: true
+    })
   }
+}
+
   render () {
     return (
-      <div>
-        <h1> Hello </h1>
-        <div> First name: {this.props.firstName} </div>
-        <div> Last name: {this.props.lastName} </div>
-        <div> Email: {this.props.email} </div>
-        <button onClick={this.goToHome}> Return </button>
+      <div className='main-user'>
+        <div className='user-content-wrap'>
+          <div className='main-wrap'>
+          <div className='user-image'>
+          <label for='pct' onClick={this.saveAvatar} > <img  className={this.state.files ? 'disable' : 'enable'} src={addImage} alt='Avatar' /></label>
+          <input type='file' id='pct' />
+            <p className='edit-button'> </p> </div>
+          <div className='user-content'>
+            <h1> Hello, {this.props.firstName} </h1>
+            <p> Welcome to  you're profile </p>
+            <div className='div-wrap'> First name: {this.props.firstName} <p> <img src={edit} alt='edit'/> </p></div>
+            <div className='div-wrap'> Last name: {this.props.lastName}<p> <img src={edit} alt='edit' /> </p></div>
+            <div className='div-wrap'> Email: {this.props.email}<p> <img src={edit} alt='edit'/> </p> </div>
+          </div>
+        </div>
+        </div>
       </div>
     )
   }
