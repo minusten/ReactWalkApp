@@ -3,12 +3,13 @@ import { bindActionCreators } from 'redux'
 import { changeStateProp } from '../../actions'
 import UserComponent from './index'
 
-const mapStateToProps = ({ main: { value, firstName, lastName, email } }) => {
+const mapStateToProps = (state) => {
+  console.log(state)
   return {
-    value,
-    firstName,
-    lastName,
-    email
+
+    firstName: state.main.data.firstName,
+    lastName: state.main.data.lastName,
+    email: state.main.data.email
   }
 }
 const mapDispatchToProps = (dispatch) => {

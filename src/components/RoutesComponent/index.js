@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-
+import './index.css'
 class Routes extends Component {
     constructor(props){
         super(props)
@@ -13,9 +13,12 @@ class Routes extends Component {
   }
   render () {
     return (
-      <div>
+      <div className='routes'>
+                <div className='routes-content'> 
                 Routes
-                <button onClick={this.goToHome}> Return </button> 
+          
+                 </div>
+                
       </div>
     )
   }

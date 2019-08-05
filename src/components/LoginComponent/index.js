@@ -43,9 +43,11 @@ class Login extends Component {
     axios.post(`${API_URL}/login`, { user: { email: this.state.formData.email, password: this.state.formData.password } })
       .then((response) => {
         console.log(response)
+        this.props.changeStateProp('data', response.data.user, 'main')
         cookies.set('token', response.data.user.token)
         this.props.history.push('/')
       })
+      
   }
   componentDidMount() {  
     if (cookies.get('token')) {
