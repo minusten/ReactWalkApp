@@ -1,18 +1,46 @@
 .addRoute {
-    background-image: url('../../assets/images/back4.jpg'); 
-    background-size: cover;
-    background-repeat: no-repeat;
-    position: fixed;
-    background-attachment: scroll;
-    background-position: 50%;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    z-index: 0;
+   height: 100%;
+    width: 100%;  
+    display: flex;
+    justify-content: center;
+    align-items: center;  
+   
 }
-.add-content {
-    z-index: 1;
-    padding-top: 100px;
-    color:black
+.wrap-routes {
+     width: 100%;
+    display: flex;
+    justify-content: space-between
+  
 }
+.menu-routes {
+    font-weight: bold;
+    height: 490px;
+    width: 30%;
+    background-color: rgba(244, 207, 174, 0.82);
+    border-left: white 1px solid;
+    
+    
+}
+.menu-item button { 
+    align-items: center;
+    justify-content: center; 
+    flex-direction: column;
+    display: flex;
+    width: 100px;
+    margin: 0 auto
+  
+}
+.menu-routes button {
+    width: 100px
+}
+.menu-routes button:hover {
+    color: blueviolet
+}
+.map {
+    position: relative;
+    height: 500px;
+    width: 60%;
+    border: 10px solid rgba(244, 207, 174, 0)
+    
+
+};
