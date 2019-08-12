@@ -105,7 +105,7 @@ class Header extends Component {
                 </nav>
                 <div>
 
-                    <div className='map-wrap'> </div>
+                 
                 </div>
             </div>
         )

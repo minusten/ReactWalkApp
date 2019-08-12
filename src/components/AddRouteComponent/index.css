@@ -9,38 +9,49 @@
 .wrap-routes {
      width: 100%;
     display: flex;
-    justify-content: space-between
+    justify-content: space-between;
+    padding: 0
   
 }
 .menu-routes {
     font-weight: bold;
-    height: 490px;
+    height: 675px;
     width: 30%;
     background-color: rgba(244, 207, 174, 0.82);
     border-left: white 1px solid;
     
     
 }
-.menu-item button { 
-    align-items: center;
-    justify-content: center; 
-    flex-direction: column;
-    display: flex;
-    width: 100px;
-    margin: 0 auto
-  
+.menu-routes p { 
+    font-weight: 300;
+    font-size: 25px;
+    color: #000;
 }
 .menu-routes button {
-    width: 100px
+    width: 83%;
+    margin-top: 10px;
+    background-color:  rgba(244, 207, 174, 0.82);
+    font-weight: 300;
+    font-size: 20px;
+    color: #000;
+    border: none;
+    height: 60px;
+    text-align: center;
+    cursor: pointer;
+    outline: 0 !important;
+    border-bottom: 1px white solid
 }
 .menu-routes button:hover {
-    color: blueviolet
+    background-color: rgb(228, 192, 129)
 }
 .map {
     position: relative;
     height: 500px;
     width: 60%;
     border: 10px solid rgba(244, 207, 174, 0)
-    
+}
 
-};
+.add-img {
+    height: 35px;
+    width: 35px
+}

@@ -7,8 +7,7 @@ import avatar from '../../assets/images/avatar.png'
 import lock from '../../assets/images/lock.png'
 import users from '../file.json'
 import Cookies from 'universal-cookie'
-import axios from 'axios'
-import {API_URL} from '../../config'
+import API from '../../utils/api'
 
 const cookies = new Cookies()
 
@@ -38,9 +37,9 @@ class Login extends Component {
 
   login = (response) => {
     console.log('sdfsd')
-    console.log(API_URL)
+   
 
-    axios.post(`${API_URL}/login`, { user: { email: this.state.formData.email, password: this.state.formData.password } })
+    API.login({ email: this.state.formData.email, password: this.state.formData.password })
       .then((response) => {
         console.log(response)
         this.props.changeStateProp('data', response.data.user, 'main')
