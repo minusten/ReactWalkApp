@@ -1,9 +1,8 @@
 import React, { Component } from 'react'
 import { Map, Marker, GoogleApiWrapper, Polyline } from 'google-maps-react'
-import axios from 'axios'
 import './index.css'
 import Geolocation from 'react-geolocation'
-import {API_URL} from '../../config'
+import API from '../../utils/api'
 
 export class MapContainer extends Component {
     constructor(props) {
@@ -11,7 +10,6 @@ export class MapContainer extends Component {
   
       this.state = {
         markers: [],
-        marker2: '',
         locations: [],
         propgress: [],
         polylines: [],
@@ -23,16 +21,7 @@ export class MapContainer extends Component {
       }
     }
   
-    // displayMarkers = () => {
-    //   return this.state.stores.map((store, index) => {
-    //     return <Marker key={index} id={index} position={{
-    //      lat: store.latitude,
-    //      lng: store.longitude
-    //    }}
-    //    onClick={() => console.log("You clicked me!")} />
-    //   })
-    // }
-    
+
     geoSuccess = position => { 
       let coords = {
         lat: position.coords.latitude,
@@ -74,11 +63,12 @@ export class MapContainer extends Component {
   }
   addRoute = (response) => {
     console.log('sdfsd')
+    console.log('title:', this.state.title)
 
-
-    axios.post(`${API_URL}`, {locations: {location: this.state.locations}})
+    API.walkPost({coordinates: this.state.locations, title: this.props.title, type: this.props.type})
       .then((response) => {
-        
+        console.log('Success')
+       
       })
       
   }
@@ -109,16 +99,14 @@ export class MapContainer extends Component {
     render() {
    
       return (
-         <div>
+         <div className='map-container'>
           <Map
             onClick={this.handleMapClick}
             google={this.props.google}
             zoom={6}
             initialCenter={{ lat:  49.449635, lng: 32.062827}}
-            
+          
           >
-            
-            {/* {this.displayMarkers()} */}
             {this.state.locations.map((location, i) => {
             return (
               <Marker
@@ -154,7 +142,7 @@ export class MapContainer extends Component {
         
          />
           <p>{console.log(this.state.locations)}</p>
-          <button onClick={this.addRoute} className='add'> Add </button>
+          <button onClick={this.addRoute}  className='add'> Add </button>
          </div>
       );
     }
