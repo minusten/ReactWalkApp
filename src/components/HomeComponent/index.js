@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import './index.css'
-import { Redirect } from 'react-router-dom'
+
 class Home extends Component {
   constructor (props) {
     super(props)
@@ -9,18 +9,11 @@ class Home extends Component {
       redirect: ''
     }
   }
- goToLogin = () => {
- this.setState({
-     redirect: '/login'
- })
- }
+
   render () {
-    const { redirect} = this.state
-    return (       
+    return (
       <div className='home'>
-          {redirect && <Redirect to={redirect}  /> }
-            <h1> Please, sign in! </h1>
-            {/* <button onClick={this.goToLogin}> Sign In </button> */}
+        <h1> Please, sign in! </h1>
       </div>
     )
   }

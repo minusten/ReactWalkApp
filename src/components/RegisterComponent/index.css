@@ -4,7 +4,7 @@
     margin-top: 10%;
     font-size: 1.5em;
     font-weight: bold;
-    height: 350px;
+    height: 400px;
     width: 470px;
     background-color: rgba(244, 207, 174, 0.82);
     border-radius: 20px;
@@ -14,15 +14,24 @@
 
 
 .mainWrap {
-  height: 600px;
-  margin: 0 auto;
-  padding: 20px;
+  overflow: auto;
+  height: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
-  resize: both;
   overflow: auto;
-    
+  background-image: url('../../assets/images/back4.jpg'); 
+  background-size: cover;
+    background-repeat: no-repeat;
+    position: fixed;
+    background-attachment: scroll;
+    background-position: 50%;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 0;
+
 }
 .MuiFormControl-root {
   
@@ -38,7 +47,9 @@
     color:#e8cdb0;
     background-color: #40b53f !important;
 }
-
+.MuiButton-containedPrimary:hover {
+    background-color: #40b53f !important;
+}
 h2 {
     color: rgba(11, 80, 76, 0.5);
 }

@@ -7,8 +7,6 @@ export default class Spinner extends Component {
       <Loader
         type='TailSpin'
         color='#000'
-        height='100'
-        width='100'
       />
     )
   }

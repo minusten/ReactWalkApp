@@ -10,16 +10,31 @@
      width: 100%;
     display: flex;
     justify-content: space-between;
-    padding: 0
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: auto;
+    background-image: url('../../assets/images/back4.jpg'); 
+      background-size: cover;
+      background-repeat: no-repeat;
+      position: fixed;
+      background-attachment: scroll;
+      background-position: 50%;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      z-index: 0;
   
 }
 .menu-routes {
     font-weight: bold;
-    height: 675px;
+    height: 575px;
     width: 30%;
     background-color: rgba(244, 207, 174, 0.82);
     border-left: white 1px solid;
-    
+    margin-top: 120px;
     
 }
 .menu-routes p { 
@@ -54,4 +69,7 @@
 .add-img {
     height: 35px;
     width: 35px
+}
+.MuiFormControl-root {
+    width: 90%
 }

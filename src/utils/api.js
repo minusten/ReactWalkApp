@@ -36,5 +36,12 @@ class API {
       data: { user }
     })
   }
+
+  static register (user) {
+    return axios('/registration', {
+      method: 'post',
+      data: { user }
+    })
+  }
 }
 export default API

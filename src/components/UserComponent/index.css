@@ -1,4 +1,4 @@
-body {
+/* body {
     background-image: url('../../assets/images/back4.jpg'); 
     background-size: cover;
     background-repeat: no-repeat;
@@ -10,10 +10,28 @@ body {
     left: 0;
     z-index: 0;
     scroll-snap-points-y: none; 
+} */
+.main-user-wrap {
+    overflow: auto;
+    background-image: url('../../assets/images/back4.jpg'); 
+      background-size: cover;
+      background-repeat: no-repeat;
+      position: fixed;
+      background-attachment: scroll;
+      background-position: 50%;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      z-index: 0;
 }
 .main-user {
     background-color: rgba(244, 207, 174, 0.52);
-    height: 677px;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
 }
 .user-content {
     height: 50%;

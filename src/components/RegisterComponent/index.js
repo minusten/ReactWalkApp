@@ -1,10 +1,9 @@
-import React, { Component } from 'react';
-import Button from '@material-ui/core/Button';
-import { ValidatorForm, TextValidator } from 'react-material-ui-form-validator';
+import React, { Component } from 'react'
+import Button from '@material-ui/core/Button'
+import { ValidatorForm, TextValidator } from 'react-material-ui-form-validator'
 import { NavLink } from 'react-router-dom'
-import axios from 'axios'
 import './index.css'
-
+import API from '../../utils/api'
 
 class Register extends Component {
   state = {
@@ -16,33 +15,37 @@ class Register extends Component {
     },
     submitted: false,
     cookiesSaved: false,
-    status: true,
-    
+    status: true   
   }
-  validFieldChange = (e) => {
-    const { formData } = this.state;
-    formData[e.target.name] = e.target.value;
-    this.setState({ formData })
-    console.log(this.state)
-  }
+validFieldChange = (e) => {
+  const { formData } = this.state;
+  formData[e.target.name] = e.target.value;
+  this.setState({ formData })
+  console.log(this.state)
+}
 
-  handlePost = () => {
-    axios.post(`http://10.0.4.20:3006/users`, { user: this.state.formData })
-      .then(res => {
-        console.log(res);
-        this.props.history.push('/login')
-      })
+register = (response) => {
+  console.log('Registered')
+   API.register({ user: this.state.formData })
+   .then(res => {
+    console.log('Register');
+    this.props.history.push('/login')
+   }) 
+}
+checkSubmit = () => {
+  return console.log('Submitted')
+}
 
-  }
-  render() {
-    
-    const { submitted } = this.state;
+  render() { 
+   const { submitted } = this.state;
     console.log(this.props)
-    return (
+     return (
       <div className='mainWrap'>
         <div className='formWrap'>
           <div className='registerForm'>
-            <ValidatorForm>
+            <ValidatorForm
+              onSubmit={this.checkSubmit}
+            >
               <h2>Registration</h2>
               <TextValidator
                 label="First Name"
@@ -51,7 +54,6 @@ class Register extends Component {
                 value={this.state.firstName}
                 validators={['required']}
                 errorMessages={['this field is required']}
-
               />
               <br />
               <TextValidator
@@ -76,6 +78,7 @@ class Register extends Component {
                 label="Password"
                 onChange={this.validFieldChange}
                 name="password"
+                type="password"
                 value={this.state.password}
                 validators={['required']}
                 errorMessages={['this field is required']}
@@ -83,7 +86,7 @@ class Register extends Component {
               <br />
               <Button
                 className='buttonSubmit'
-                onClick={this.handlePost}
+                onClick={this.register}
                 color="primary"
                 variant="contained"
                 type="submit"
@@ -95,10 +98,10 @@ class Register extends Component {
               </Button>
             </ValidatorForm>
           </div>
-          <NavLink to='/login'>   <p> У вас уже есть аккаунт? </p>  </NavLink>
+          <NavLink to='/login'> <p> Sign in </p> </NavLink>
         </div>
       </div>
-    );
+    )
   }
 }
 

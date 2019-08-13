@@ -18,13 +18,12 @@ import Cookies from 'universal-cookie'
 const cookies = new Cookies()
 
 class App extends Component {
+
   componentDidMount = () => {
-    this.props.fetchData('http://10.0.4.20:3006/users')
-    
+    this.props.fetchData('http://10.0.4.20:3006/users')  
   }
 
-  render() {
-  
+  render() { 
     return (
       <CookiesProvider>
         <div className="App">
@@ -36,14 +35,11 @@ class App extends Component {
             <Route path='/routes' component={indexRoutesContainer} />
             <Route path='/add' component={indexAddRouteContainer} />
             <Route exact path='/' component={indexHomeContainer} />
-          </Switch>
-       
+          </Switch>      
         </div>
       </CookiesProvider>
-
     )
   }
-
 }
 const mapStateToProps = (state) => {
   return {
