@@ -38,12 +38,12 @@ login = (response) => {
       console.log(response)
       this.props.changeStateProp('data', response.data.user, 'main')
       cookies.set('token', response.data.user.token)
-      this.props.history.push('/')
+      this.props.history.push('/user')
     })   
 }
 componentDidMount() {  
   if (cookies.get('token')) {
-    return this.props.history.push('/')
+    return this.props.history.push('/user')
   }
 }
 checkSubmit = () => {
