@@ -11,7 +11,8 @@
     cursor: pointer;
     outline: 0 !important;
     border-bottom: 1px white solid;
-    
+    z-index: 100;
+    margin-right: 200px
 }
 .add:hover {
     background-color: rgb(228, 192, 129)

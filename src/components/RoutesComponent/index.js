@@ -17,7 +17,12 @@ constructor (props) {
     isLoading: true,
     locations: [],
     polylines: [],
-    type: ''
+    type: '',
+    center: [],
+    markers: [],
+    lat: [],
+    lng: [],
+    distance: []
   }
 }
 renderRouteImg = (type) => { 
@@ -26,21 +31,51 @@ renderRouteImg = (type) => {
     return <img src={walk} alt='walk' className='walks-img'/>
   case 'Bicycle': 
     return <img src={bicycle} alt='bicycle' className='walks-img'/>
-  case 'car': 
+  case 'Car': 
     return  <img src={car} alt='car' className='walks-img'/>
   default:
     return ''
   }   
 } 
 
-componentDidMount () { 
+componentDidMount (google, res) { 
+  // let mark1 = new google.maps.LatLng(res.data.walks.coordinates)
+  // let mark2 = new google.maps.LatLng(res.data.walks.coordinates)
  API.walkGet()  
   .then(res => this.setState({ 
     routes: res.data.walks,
     isLoading: false,
     locations: res.data.walks.coordinates,
-    polylines: res.data.walks.coordinates
+    lat: res.data.walks.lat,
+    lng: res.data.walks.lng
+    // distance: google.maps.geometry.spherical.computeDistanceBetween(mark1, mark2)
   }))
+  
+}
+// someFunc = () => { 
+//     //using, for example as:
+//     this._map.getCenter() 
+//     this._map.setZoom(5)
+//   }
+
+// checkCoords = (google) => {
+//   let mark1 = new google.maps.LatLng(40.715, -74.002)
+//   let mark2 = new google.maps.LatLng(51.506, -0.119)
+//  let  distance = google.maps.geometry.spherical.computeDistanceBetween(mark1, mark2)
+ 
+// }
+
+getCenter = (route) => {
+  console.log(route)
+  let totalLat = 0
+  let totalLng = 0
+  for(let i = 0; i < route.coordinates.length; i++) {
+    totalLat += route.coordinates[i].lat
+    totalLng += route.coordinates[i].lng
+  }
+  const avgLat = totalLat / route.coordinates.length
+  const avgLng = totalLng / route.coordinates.length
+  return({lat: avgLat, lng: avgLng})
 }
 
 getCenter = (route) => {
@@ -66,6 +101,8 @@ handleMapClick = (map, e) => {
 }
 
 render () {
+  
+ 
  const style = {width: '300px', height: '200px', borderRadius: '20px'}
   return (
    <div className='routes'>
@@ -73,17 +110,21 @@ render () {
      { this.state.isLoading ? <Spinner />
       : <div>
        {
+
         this.state.routes.map((route, i) => {
+
          return (
           <div className='data-wrap' key={i} >
             <div className='map-wrap'> 
               <Map   
+
                 key={route.toString()}
                 style={style}
                 google={this.props.google}
                 zoom={4}
                 initialCenter={this.getCenter(route)}
               >
+
                 {route.coordinates.map((coord, i) => {
                   return (
                     <Marker   
@@ -93,7 +134,9 @@ render () {
                   )
                 })}                 
               <Polyline 
+
                 path={route.coordinates}
+
                 geodesic={true}
                 options={{
                 strokeColor: "#ffc107",
@@ -106,8 +149,10 @@ render () {
               />     
               </Map>
             </div>                       
+
            <p className='walks-title'>{route.title}</p>
           <p>{this.renderRouteImg(route.type) }</p>
+
         </div>)
       })}
      </div>}
@@ -117,5 +162,6 @@ render () {
  }
 
 export default GoogleApiWrapper({
+
 apiKey: ('https://maps.googleapis.com/maps/api/geocode/json?address=1600+Amphitheatre+Parkway,+Mountain+View,+CA&key=AIzaSyBYg8KHYmVikQp7WWh_k7hzzJ0LLDMNA8o')
 })(Routes)

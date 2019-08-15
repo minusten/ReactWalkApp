@@ -3,6 +3,7 @@ import { Map, Marker, GoogleApiWrapper, Polyline } from 'google-maps-react'
 import './index.css'
 import Geolocation from 'react-geolocation'
 import API from '../../utils/api'
+import Loader from '../Loader'
 
 export class MapContainer extends Component {
     constructor(props) {
@@ -11,7 +12,8 @@ export class MapContainer extends Component {
         markers: [],
         locations: [],
         propgress: [],
-        polylines: []      
+        polylines: [],
+        isLoader: false      
       }
     }
   
@@ -52,6 +54,7 @@ export class MapContainer extends Component {
       }
   }))
   }
+
   addRoute = () => {
   console.log('title:', this.state.title)
   API.walkPost({coordinates: this.state.locations, title: this.props.title, type: this.props.type})
@@ -59,6 +62,21 @@ export class MapContainer extends Component {
       console.log('Success')  
     })
   }
+  addLoader = () => {
+    if( this.addRoute()) {
+      this.setState({
+        isLoader: true
+      })
+      return <Loader />
+    } else {
+      this.setState({
+        isLoader: false
+      })
+    }
+   
+   
+  }
+
 
   getcurrentLocation = () => {
   if (navigator && navigator.geolocation) {
