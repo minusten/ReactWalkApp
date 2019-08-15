@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { Map, Marker, GoogleApiWrapper, Polyline } from 'google-maps-react'
+import * as map from 'google-map-react'
 import API from '../../utils/api'
 import './index.css'
 import Spinner from '../Loader'
@@ -77,6 +78,19 @@ getCenter = (route) => {
   return({lat: avgLat, lng: avgLng})
 }
 
+getCenter = (route) => {
+  console.log(route)
+  let totalLat = 0
+  let totalLng = 0
+  for(let i = 0; i < route.coordinates.length; i++) {
+    totalLat += route.coordinates[i].lat
+    totalLng += route.coordinates[i].lng
+  }
+  const avgLat = totalLat / route.coordinates.length
+  const avgLng = totalLng / route.coordinates.length
+  return({lat: avgLat, lng: avgLng})
+}
+
 handleMapClick = (map, e) => {
   const location = e.latLng  
   this.setState(prevState => ({
@@ -96,20 +110,21 @@ render () {
      { this.state.isLoading ? <Spinner />
       : <div>
        {
-        this.state.routes.map((route, map) => {
+
+        this.state.routes.map((route, i) => {
+
          return (
-          <div className='data-wrap'>                                         
+          <div className='data-wrap' key={i} >
             <div className='map-wrap'> 
               <Map   
-                key={route.toString()}                          
+
+                key={route.toString()}
                 style={style}
                 google={this.props.google}
-                zoom={3}
-               
-                // ref={(map) => this._map = map} 
-                
-                center={this.getCenter(route)}
-              >                 
+                zoom={4}
+                initialCenter={this.getCenter(route)}
+              >
+
                 {route.coordinates.map((coord, i) => {
                   return (
                     <Marker   
@@ -119,7 +134,9 @@ render () {
                   )
                 })}                 
               <Polyline 
-                path={route.coordinates} 
+
+                path={route.coordinates}
+
                 geodesic={true}
                 options={{
                 strokeColor: "#ffc107",
@@ -132,8 +149,10 @@ render () {
               />     
               </Map>
             </div>                       
-           <p className='walks-title'>{route.title}</p>                                 
-          <p>{this.renderRouteImg(route.type) }</p>                     
+
+           <p className='walks-title'>{route.title}</p>
+          <p>{this.renderRouteImg(route.type) }</p>
+
         </div>)
       })}
      </div>}
