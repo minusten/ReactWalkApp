@@ -49,5 +49,5 @@ const mapDispatchToProps = dispatch => {
     fetchData: url => dispatch(usersFetchData(url))
   }
 }
-console.log('App')
+
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(App))

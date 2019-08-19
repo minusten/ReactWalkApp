@@ -125,7 +125,7 @@ handleMapClick = (ref, map, e) => {
 }
 
 render() {
-  const style = {width: '600px', height: '610px', borderRadius: '20px'}
+  const style = {width: '80%', height: '610px', borderRadius: '20px'}
   return(  
     <div className='addRoute'>  
       <div className='wrap-routes'> 

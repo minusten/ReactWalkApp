@@ -109,6 +109,7 @@ render () {
                 onReady={this.adjustMap}            
                 key={i}
                 style={style}
+                zoom={1}
                 google={this.props.google}             
                 initialCenter={this.getCenter(route)}
               >

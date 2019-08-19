@@ -9,7 +9,6 @@ axios.defaults.baseURL = BASE_URL
 
 axios.interceptors.request.use((config) => {
   config.headers['x-api-key'] = cookies.get('token')
-  console.log('token: ', cookies.get('token'))
   return config
 }, (error) => {
   return Promise.reject(error)
