@@ -23,7 +23,6 @@ validFieldChange = (e) => {
   this.setState({ formData })
   console.log(this.state)
 }
-
 register = (response) => {
   console.log('Registered')
    API.register({ user: this.state.formData })

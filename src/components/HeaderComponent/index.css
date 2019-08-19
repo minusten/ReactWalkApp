@@ -1,144 +1,137 @@
 .navbar {
-    display: flex;
-    background-color:#e8cdb0;
-    font-weight: 400;
-    height: 70px;
-    justify-content: space-between;
-    align-items: initial !important;
-    z-index: 1;
+  display: flex;
+  background-color:#e8cdb0;
+  font-weight: 400;
+  height: 70px;
+  justify-content: space-between;
+  align-items: initial !important;
+  z-index: 1;
 }
 
 .navbar-block {
-    width: 80%;
-    margin: 0 auto;
-    height: 70px;
+  width: 80%;
+  margin: 0 auto;
+  height: 70px;
 }
 li {
-    flex-direction: row
+  flex-direction: row
 }
 .button-container {
-    width: 80%;
-    display: flex;
-    font-size: 25px;
-    
+  width: 80%;
+  display: flex;
+  font-size: 25px; 
 }
 
 .add-routes-button  {
-    background-color: #e8cdb0;
-    font-weight: 400;
-    font-size: 15px;
-    color: #000;
-    /* border-radius: 5px; */
-    height: 60px;
-    padding:0 40px;
-    border: none;
-    border-bottom: 5px solid#977f6d;
-    text-align: center;
-    display: block;
-    cursor: pointer;
-    outline: 0 !important;
-    width: 150px;
+  background-color: #e8cdb0;
+  font-weight: 400;
+  font-size: 15px;
+  color: #000;
+  height: 60px;
+  padding:0 40px;
+  border: none;
+  border-bottom: 5px solid#977f6d;
+  text-align: center;
+  display: block;
+  cursor: pointer;
+  outline: 0 !important;
+  width: 150px;
 }
 
 .routes-button  {
-    background-color: #e8cdb0;
-    font-weight: 400;
-    font-size: 15px;
-    color: #000;
-    /* border-radius: 5px; */
-    height: 60px;
-    padding:0 40px;
-    border: none;
-    border-bottom: 5px solid #977f6d;
-    text-align: center;
-    display: block;
-    cursor: pointer;
-    outline: 0 !important;
-    width: 150px;
+  background-color: #e8cdb0;
+  font-weight: 400;
+  font-size: 15px;
+  color: #000;
+  height: 60px;
+  padding:0 40px;
+  border: none;
+  border-bottom: 5px solid #977f6d;
+  text-align: center;
+  display: block;
+  cursor: pointer;
+  outline: 0 !important;
+  width: 150px;
 }
 
 .routes-button:hover {
-    border-bottom-color: #8c3823;
-    background-color: #e3d6ce;
+  border-bottom-color: #8c3823;
+  background-color: #e3d6ce;
 }
 
 .menu { 
-    justify-content: flex-end;
-    padding-top: 10px;
-    display: flex;
-    flex-direction: column;
-    display: flex;
-  
+  justify-content: flex-end;
+  padding-top: 10px;
+  display: flex;
+  flex-direction: column;
+  display: flex;
 }
 .menu button:hover {
-    border: white 1px solid;
-    background-color: #e3d6ce;
+  border: white 1px solid;
+  background-color: #e3d6ce;
 }
 .menu button {
-    outline: 0 !important;
-    border-radius: 5px;
-    width: 120px;
-    height: 50px;
-    background-color: #e8cdb0;
-    font-weight: 400;
-    font-size: 15px;
-    margin-top: 5px;
-    cursor: pointer;
-    padding: 0 40px;
-    border: none;
+  outline: 0 !important;
+  border-radius: 5px;
+  width: 120px;
+  height: 50px;
+  background-color: #e8cdb0;
+  font-weight: 400;
+  font-size: 15px;
+  margin-top: 5px;
+  cursor: pointer;
+  padding: 0 40px;
+  border: none;
 }
 .userButton {
-    background-color:#e8cdb0;
-    border: none;
-    cursor: pointer;
-    width: 120px;
-    height: 50px;   
-    outline: 0 !important;
+  background-color:#e8cdb0;
+  border: none;
+  cursor: pointer;
+  width: 120px;
+  height: 50px;   
+  outline: 0 !important;
 
 }
 .unselected {
-    background-color: #e8cdb0;
-    font-weight: 400;
-    font-size: 15px;
-    color: #000;
-    /* border-radius: 5px; */
-    height: 60px;
-    padding:0 40px;
-    border: none;
-    border-bottom: 5px solid #977f6d;
-    text-align: center;
-    display: block;
-    cursor: pointer;
-    outline: 0 !important;
+  background-color: #e8cdb0;
+  font-weight: 400;
+  font-size: 15px;
+  color: #000;
+  height: 60px;
+  padding:0 40px;
+  border: none;
+  border-bottom: 5px solid #977f6d;
+  text-align: center;
+  display: block;
+  cursor: pointer;
+  outline: 0 !important;
 }
 .active  {
-    background-color: #e8cdb0;
-    font-weight: 400;
-    font-size: 15px;
-    color: #000;
-    /* border-radius: 5px; */
-    height: 60px;
-    width: 150px;
-    border: none;
-    border-bottom: 5px solid #8c3823;
-    text-align: center;
-    display: block;
-    cursor: pointer;
-    outline: 0 !important;
+  background-color: #e8cdb0;
+  font-weight: 400;
+  font-size: 15px;
+  color: #000;
+  height: 60px;
+  width: 150px;
+  border: none;
+  border-bottom: 5px solid #8c3823;
+  text-align: center;
+  display: block;
+  cursor: pointer;
+  outline: 0 !important;
 }
 .unactive {
-    background-color: #e8cdb0;
-    font-weight: 400;
-    font-size: 15px;
-    color: #000;
-    /* border-radius: 5px; */
-    height: 60px;
-    padding:0 40px;
-    border: none;
-    border-bottom: 5px solid #977f6d;
-    text-align: center;
-    display: block;
-    cursor: pointer;
-    outline: 0 !important;
-    width: 150px;
+  background-color: #e8cdb0;
+  font-weight: 400;
+  font-size: 15px;
+  color: #000;
+  height: 60px;
+  padding:0 40px;
+  border: none;
+  border-bottom: 5px solid #977f6d;
+  text-align: center;
+  display: block;
+  cursor: pointer;
+  outline: 0 !important;
+  width: 150px;
 }

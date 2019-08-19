@@ -14,15 +14,12 @@ import indexAddRouteContainer from './components/AddRouteComponent/indexContaine
 import Header from './components/HeaderComponent/index'
 import Cookies from 'universal-cookie'
 
-
 const cookies = new Cookies()
 
 class App extends Component {
-
-  componentDidMount = () => {
+componentDidMount = () => {
     this.props.fetchData('http://10.0.4.20:3006/users')  
-  }
-
+}
   render() { 
     return (
       <CookiesProvider>
