@@ -3,9 +3,9 @@ import { bindActionCreators } from 'redux'
 import { changeStateProp } from '../../actions'
 import AddRoute from './index'
 
-const mapStateToProps = ({ main: { value } }) => {
+const mapStateToProps = (state) => {
   return {
-    value
+    firstName: state.main.data.firstName
   }
 }
 

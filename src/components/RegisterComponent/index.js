@@ -21,11 +21,10 @@ validFieldChange = (e) => {
   const { formData } = this.state;
   formData[e.target.name] = e.target.value;
   this.setState({ formData })
-  console.log(this.state)
 }
 register = (response) => {
   console.log('Registered')
-   API.register({ user: this.state.formData })
+   API.register( this.state.formData )
    .then(res => {
     console.log('Register');
     this.props.history.push('/login')
@@ -37,7 +36,6 @@ checkSubmit = () => {
 
   render() { 
    const { submitted } = this.state;
-    console.log(this.props)
      return (
       <div className='mainWrap'>
         <div className='formWrap'>

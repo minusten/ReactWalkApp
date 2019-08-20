@@ -9,6 +9,8 @@ axios.defaults.baseURL = BASE_URL
 
 axios.interceptors.request.use((config) => {
   config.headers['x-api-key'] = cookies.get('token')
+  config.headers['x-total-count'] = 22
+  config.headers['x-total-pages'] = 3
   return config
 }, (error) => {
   return Promise.reject(error)
@@ -22,10 +24,13 @@ class API {
     })
   }
 
-  static walkGet () {
+  static walkGet (page = null, limit = null) {
     return axios('/walks', {
-      method: 'get'
-
+      method: 'get',
+      params: {
+        page,
+        limit
+      }
     })
   }
 
@@ -37,9 +42,16 @@ class API {
   }
 
   static register (user) {
-    return axios('/registration', {
+    return axios('/users', {
       method: 'post',
       data: { user }
+    })
+  }
+
+  static delete (data) {
+    return axios('/walks', {
+      method: 'delete',
+      data: { walk: data }
     })
   }
 }

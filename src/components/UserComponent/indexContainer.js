@@ -4,7 +4,6 @@ import { changeStateProp } from '../../actions'
 import UserComponent from './index'
 
 const mapStateToProps = (state) => {
-  console.log(state)
   return {
     firstName: state.main.data.firstName,
     lastName: state.main.data.lastName,

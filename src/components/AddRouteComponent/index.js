@@ -15,10 +15,8 @@ class AddRoute extends Component {
       this.state = {
         showItem: false,
         type: '',
-        title: '',
-        text: {                
-            description: ''
-        },
+        title: '',                
+        description: '',
         markers: [],
         locations: [],
         propgress: [],
@@ -58,6 +56,11 @@ editTitle = (e) => {
     title: e.target.value
   })
 }
+editDesc = (e) => {
+  this.setState({
+    description: e.target.value
+  })
+}
 changeInput = (e) => {
   const { text } = this.state;
   text[e.target.name] = e.target.value;
@@ -83,7 +86,7 @@ checkSubmit = () => {
   return console.log('Submitted')
 }
 addRoute = () => {
-  if (this.state.title !== '' && this.state.text.description !== '' && this.state.type !== '' && this.state.polylines.length > 1) {
+  if (this.state.title !== '' && this.state.description !== '' && this.state.type !== '' && this.state.polylines.length > 1) {
     console.log('Good')
     console.log('title:', this.state.title)
     console.log(this.state.locations) 
@@ -94,15 +97,15 @@ addRoute = () => {
       })   
     }, 0)
     setTimeout(() => {
-  API.walkPost({coordinates: this.state.locations, title: this.state.title, type: this.state.type})
+  API.walkPost({coordinates: this.state.locations, title: this.state.title, type: this.state.type, description: this.state.description})
     .then((response) => {
      this.setState({
        spinner: '',
        type: '',
        title: '',
-       text: {
-         description: ''
-       }
+       description: '',
+       locations: [],
+       polylines: []
      })
     })
   }, 3000)
@@ -133,7 +136,7 @@ render() {
       <div>  
         <Modal className='modal' show={this.state.show} onHide={this.handleClose}>
          <Modal.Header closeButton>
-          <Modal.Title>Hello</Modal.Title>
+          <Modal.Title>{this.props.firstName}, </Modal.Title>
          </Modal.Header>
          <Modal.Body>Please, contain all fields!</Modal.Body>
         </Modal> 
@@ -208,7 +211,8 @@ render() {
             <TextValidator               
               label='Description'
               name='description'
-              onChange={this.changeInput}
+              value={this.state.description}
+              onChange={this.editDesc}
               validators={['required']}
               errorMessages={['this field is required']}
             /> 

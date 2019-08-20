@@ -14,14 +14,15 @@ this.state = {
     token: '',
     showMenu: false,
     redirect: '',
-    active: false
+    active: false,
+    activeAdd: false
  }
 }
 
 showMenu = (e) => {
     e.preventDefault();
 
-    this.setState({ showMenu: true }, () => {
+    this.setState({ showMenu: true, active: false}, () => {
         document.addEventListener('click', this.closeMenu);
     })
 }
@@ -41,20 +42,30 @@ funcLogOut = () => {
 }
 goToUser = () => {
     this.setState({
-        redirect: '/user',        
+        redirect: '/user',
+        active: false,
+        activeAdd: false    
     })   
 }
 goToRoutes = () => {
     this.setState({
         redirect: '/routes',
-        active: true
+        active: true,
+        activeAdd: false
     })
+    // if (this.state.redirect === 'routes') {
+    //     return this.setState({active: true})
+    // } 
 }
 goToAddRoute = () => {
     this.setState({
         redirect: '/add',
-        active: false
+        active: false,
+        activeAdd: true
     })
+    // if (this.state.redirect === 'add') {
+    //     return this.setState({active: true})
+    // } 
 }
  render() {      
   const { redirect} = this.state
@@ -63,23 +74,23 @@ goToAddRoute = () => {
         {redirect && <Redirect to={redirect} /> }
         <nav>
           <ul className="navbar-nav mr-auto">
-           <div className='navbar'> 
+           <div className='navbar' > 
             <div className='button-container' >
-            <li>
+            <li >
                 <button onClick={this.goToRoutes}  className={this.state.active ?  'active': 'routes-button' } >Routes</button>
             </li>
-            <li>
-                <button onClick={this.goToAddRoute} className={!this.state.active ?  'active': 'add-routes-button' } >Add route</button>
+            <li >
+                <button onClick={this.goToAddRoute} className={this.state.activeAdd ?  'active': 'add-routes-button' } >Add route</button>
             </li>
             </div>
           <div className='dropdown-container'>
            <div className='menu-wrap'>
-              <button onClick={this.showMenu} className='userButton'>
+              <button onClick={this.showMenu}   className= 'userButton'  >
               <img src={user} alt="Logo" className='user' />
               </button>
-              { this.state.showMenu
+              { this.state.showMenu 
                 ? ( <div className="menu">
-                        <button onClick={this.goToUser}>Profile</button>
+                        <button onClick={this.goToUser} className={this.state.active ? '' : '' } >Profile</button>
                         <button onClick={this.funcLogOut}> <img src={logout} alt="Logo" className='profile' /> </button>                                               
                     </div>
                 ) : ( null ) }

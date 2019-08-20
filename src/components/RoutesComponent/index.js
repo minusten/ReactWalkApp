@@ -6,6 +6,10 @@ import Spinner from '../Loader'
 import walk from '../../assets/images/walk.png'
 import car from '../../assets/images/car.png'
 import bicycle from '../../assets/images/bicycle.png'
+import Cookies from 'universal-cookie'
+import InfiniteScroll from "react-infinite-scroll-component"
+
+const cookies = new Cookies()
 
 class Routes extends Component {
 constructor (props) {
@@ -21,8 +25,35 @@ constructor (props) {
     markers: [],
     lat: [],
     lng: [],
-    zoom: 17
+    page: 1,
+    limit: 10,
+    hasMore: true,
+    fetching: false,
+    loaded: false,
   }
+}
+ fetchMoreData = () => {
+  const { page, limit } = this.state
+  console.log('Scroll')
+  API.walkGet(page, limit)
+  .then((res) => {
+    if (res) {
+    let totalPages = res.config.headers['x-total-pages']
+    let newRoutes = this.state.routes.concat(res.data.walks)
+    this.setState({
+      routes: newRoutes,
+      page: this.state.page + 1,
+      hasMore: parseInt(this.state.page + 1, 10) <= totalPages,
+      isLoading: false
+    })
+  } else {
+    this.setState({
+      loaded: true,
+      fetching: false
+    })
+    console.log('AAAAAAAAAAAAAAAAAAAAAAA')
+  }
+  })
 }
 renderRouteImg = (type) => { 
  switch(type) {
@@ -36,15 +67,9 @@ renderRouteImg = (type) => {
     return ''
   }   
 } 
-componentDidMount (google, res) { 
- API.walkGet()  
-  .then(res => this.setState({ 
-    routes: res.data.walks,
-    isLoading: false,
-    locations: res.data.walks.coordinates,
-    lat: res.data.walks.lat,
-    lng: res.data.walks.lng
-  })) 
+componentDidMount () { 
+  this.fetchMoreData()
+ 
 }
 
 onIdle = ({routes, maps}) => {
@@ -58,7 +83,7 @@ onIdle = ({routes, maps}) => {
 }
 
 getCenter = (route) => {
-  console.log(route)
+  // console.log(route.createdBy)
   let totalLat = 0
   let totalLng = 0
   for(let i = 0; i < route.coordinates.length; i++) {
@@ -78,6 +103,16 @@ handleMapClick = (map, e) => {
   }))
   map.panTo(location)
 }
+
+deleteRoute = () => {
+  if (cookies.get('token')) {
+    API.delete({ routes: this.state.routes })
+    .then(res => {
+      const routes = res.data.walks;
+      this.setState({ routes });
+  })
+  }
+}
 // adjustMap(mapProps, map) {
 //   const {google, markers} = mapProps;
 //   const bounds = new google.maps.LatLngBounds();
@@ -92,6 +127,7 @@ handleMapClick = (map, e) => {
 //   // map.panToBounds(bounds);
 // }
 render () {
+
  const style = {width: '300px', height: '200px', borderRadius: '20px',
 //  top: '50%', left: '50%', transform: 'translate(-50%, -50%)'
 }
@@ -99,14 +135,23 @@ render () {
    <div className='routes'>
     <div className='routes-content'>
      { this.state.isLoading ? <Spinner />
-      : <div>
+      : 
+      <InfiniteScroll
+          dataLength={this.state.routes.length}
+          next={this.fetchMoreData}
+          hasMore={this.state.hasMore}
+          loader={<h4 style={{color: '#fff'}}>Loading...</h4>}
+          style={{ overflow: 'initial' }}
+        >
+         {console.log(this.state.hasMore, this.state.page)
+        
+        } 
        {
         this.state.routes.map((route, i, bounds) => {
          return (
           <div className='data-wrap' key={i} >
             <div className='map-wrap'> 
-              <Map   
-                onReady={this.adjustMap}            
+              <Map         
                 key={i}
                 style={style}
                 zoom={1}
@@ -137,9 +182,12 @@ render () {
             </div>                       
            <p className='walks-title'>{route.title}</p>
           <p>{this.renderRouteImg(route.type) }</p>
+          {/* <button onClick={this.deleteRoute}> Delete </button> */}
         </div>)
-      })}
-     </div>}
+      })}  
+          </InfiniteScroll> 
+    }
+
     </div>
    </div>
   )}
