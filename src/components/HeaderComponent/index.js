@@ -40,6 +40,7 @@ funcLogOut = () => {
     })
     console.log('вы вышли из системы')
 }
+
 goToUser = () => {
     this.setState({
         redirect: '/user',

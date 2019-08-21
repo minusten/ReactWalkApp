@@ -3,13 +3,13 @@ import { bindActionCreators } from 'redux'
 import { changeStateProp } from '../../actions'
 import Register from './index'
 
-const mapStateToProps = ({ main: { value, firstName, lastName, email, password } }) => {
+const mapStateToProps = ( state ) => {
+  console.log(state)
   return {
-    value,
-    firstName,
-    lastName,
-    email,
-    password
+    firstName: state.firstName,
+    lastName: state.lastName,
+    email: state.email,
+    password: state.password
   }
 }
 const mapDispatchToProps = (dispatch) => {
