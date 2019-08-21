@@ -37,7 +37,10 @@ li {
   outline: 0 !important;
   width: 150px;
 }
-
+.add-routes-button:hover {
+  border-bottom-color: #8c3823;
+  background-color: #e3d6ce;
+}
 .routes-button  {
   background-color: #e8cdb0;
   font-weight: 400;

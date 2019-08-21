@@ -7,7 +7,8 @@ import car from '../../assets/images/car.png'
 import bicycle from '../../assets/images/bicycle.png'
 import API from '../../utils/api'
 import Spinner from '../Loader'
-import Modal from 'react-bootstrap/Modal'
+import  Modal from 'react-bootstrap/Modal'
+import Button  from 'react-bootstrap/Button'
 
 class AddRoute extends Component {
   constructor(props) {
@@ -135,10 +136,13 @@ render() {
       <div> {this.state.spinner} </div>  
       <div>  
         <Modal className='modal' show={this.state.show} onHide={this.handleClose}>
-         <Modal.Header closeButton>
+         <Modal.Header >
           <Modal.Title>{this.props.firstName}, </Modal.Title>
          </Modal.Header>
          <Modal.Body>Please, contain all fields!</Modal.Body>
+         <Modal.Footer>
+        <Button variant="secondary" onClick={this.handleClose}>Close</Button>
+         </Modal.Footer>
         </Modal> 
        </div>
         <div className='map'>

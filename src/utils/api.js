@@ -54,5 +54,12 @@ class API {
       data: { walk: data }
     })
   }
+
+  static updateUser (user, id) {
+    return axios(`/users/${id}`, {
+      method: 'put',
+      data: { user }
+    })
+  }
 }
 export default API

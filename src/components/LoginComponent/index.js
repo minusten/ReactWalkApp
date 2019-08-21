@@ -14,7 +14,8 @@ class Login extends Component {
   state = {
     formData: {
       email: '',
-      password: ''
+      password: '',
+      _id: ''
     },
     status: true,
     cookiesSaved: false,
@@ -31,19 +32,16 @@ changeFields = (e) => {
   this.setState({ formData })
 }
 login = () => {
-  console.log('Logged in')
-  API.login({ email: this.state.formData.email, password: this.state.formData.password })
+  
+  API.login({ email: this.state.formData.email, password: this.state.formData.password})
     .then((response) => {
       this.props.changeStateProp('data', response.data.user, 'main')
-      cookies.set('token', response.data.user.token)
+      console.log(response.data.user)
+      cookies.set('token', response.data.user.apiKey)
       this.props.history.push('/user')
     })   
 }
-componentDidMount() {  
-  if (cookies.get('token')) {
-    return this.props.history.push('/user')
-  }
-}
+
 checkSubmit = () => {
   return console.log('Submitted')
 }

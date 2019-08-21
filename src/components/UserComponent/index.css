@@ -54,11 +54,15 @@
   background-color: #e8cdb0;
   font-weight: 400;
   font-size: 15px;
-  margin-top: 5px;
+  margin-top: 10%;
   cursor: pointer;
   padding: 0 40px;
   border: none;
   outline: 0 !important;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto;
 }
 .main-user button:hover  {
   background-color: #e3d6ce;
@@ -99,4 +103,45 @@ input {
   align-items: center;
   width: 80%;
   padding-top: 100px
+}
+.form-control{
+  display: block;
+  width: 100%;
+  padding: .375rem .75rem;
+  font-size: 20px;
+  line-height: 1.5;
+  color: #3b3b3b;
+  background-color: #e8cdb0;
+  background-clip: padding-box;
+  border: 1px solid rgba(244, 207, 174, 0);
+  border-radius: 10px;
+  margin-bottom: 10px;
+}
+.save {
+  display: flex;
+  justify-content: center;
+  align-items: center
+}
+.spinner {
+  height: 100%;
+  width: 100%;
+  z-index: 333;
+  background-color: rgba(250, 226, 204, 0.507);
+  /* position: absolute; */
+  background-size: cover;
+  background-repeat: no-repeat;
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;  
+}
+.user-content img {
+  margin: 0 auto;
+  cursor: pointer;
+  height: 40px;
+
 }

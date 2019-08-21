@@ -16,6 +16,7 @@
   color: black; 
   height: 100%;
   width: 90%; 
+  margin-bottom: 20px
 }
 .data-wrap {
   display: flex;
