@@ -6,36 +6,37 @@ import './index.css'
 import API from '../../utils/api'
 
 class Register extends Component {
-  state = {
-    formData: {
-      firstName: '',
-      lastName: '',
-      email: '',
-      password: '' 
-    },
-    submitted: false,
-    cookiesSaved: false,
-    status: true   
-  }
+  constructor(props) {
+    super(props)
+    this.state = {
+      formData: {
+        firstName: '',
+        lastName: '',
+        email: '',
+        password: '' 
+      },
+      submitted: false,
+      cookiesSaved: false,
+      status: true   
+    }
+}
+ 
 validFieldChange = (e) => {
   const { formData } = this.state;
   formData[e.target.name] = e.target.value;
   this.setState({ formData })
 }
-register = (response) => {
-  console.log('Registered')
+register = (res) => {
    API.register( this.state.formData )
    .then(res => {
-    console.log('Register');
     this.props.history.push('/login')
    }) 
 }
 checkSubmit = () => {
   return console.log('Submitted')
 }
-
   render() { 
-   const { submitted } = this.state;
+   const { submitted } = this.state
      return (
       <div className='mainWrap'>
         <div className='formWrap'>

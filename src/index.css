@@ -7,10 +7,12 @@ body {
   -moz-osx-font-smoothing: grayscale;
  
   color: white;
-  background-image: url('./assets/images/back4.jpg') ; 
+  background-image: url(/static/media/back4.fcb0ae6f.jpg);
   background-size: cover;
-  overflow: auto;
-  height: calc(100% - 70px);
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: 50%;
+  height: 100%;
  
 }
 

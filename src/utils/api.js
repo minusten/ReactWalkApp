@@ -24,12 +24,13 @@ class API {
     })
   }
 
-  static walkGet (page = null, limit = null) {
+  static walkGet (page = null, limit = null, id) {
     return axios('/walks', {
       method: 'get',
       params: {
         page,
-        limit
+        limit,
+        filter: id || {}
       }
     })
   }
@@ -59,6 +60,13 @@ class API {
     return axios(`/users/${id}`, {
       method: 'put',
       data: { user }
+    })
+  }
+
+  static getUser (params) {
+    return axios('/users', {
+      method: 'get',
+      params
     })
   }
 }

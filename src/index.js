@@ -9,7 +9,6 @@ import AppContainer from './AppContainer'
 import { persistStore } from 'redux-persist'
 import store from './store'
 
-
 persistStore(store, null, () => {
   ReactDOM.render(
     <Provider store={store}>

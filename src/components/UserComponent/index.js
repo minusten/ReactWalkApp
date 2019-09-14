@@ -1,10 +1,13 @@
 import React, { Component } from 'react'
 import './index.css'
 import edit from '../../assets/images/edit.png'
+import { Redirect } from 'react-router-dom'
 import addImage from '../../assets/images/add-image.png'
 import API from '../../utils/api'
 import Spinner from '../Loader'
+import Cookies from 'universal-cookie'
 
+const cookies = new Cookies()
 
 class UserComponent extends Component {
   constructor (props) {
@@ -17,8 +20,8 @@ class UserComponent extends Component {
       files: false,
       isEdit: false,
       id: '',
-      spinner: ''
-
+      spinner: '',
+      redirect: false
     }
   }
 
@@ -49,31 +52,41 @@ editData = () => {
       setTimeout(() => {
       this.setState({
         spinner: '',
-        isEdit: false,
-        
+        isEdit: false
       })
     }, 2000)
-      console.log(res)
-      console.log(this.state.firstName)
-      console.log(this.state.lastName)
-      console.log(this.state.email)
-    })
+   })
  }
-
 changeMod = (e) => {
   this.setState({
     isEdit: true
   })
 }
 componentDidMount() {
-  console.log(this.props.firstName)
+  let token  = cookies.get('token')
+  if (!token) {
+    this.setState({
+      redirect: true
+    })
+  }
+}
+backFunc = () => {
+  this.setState({
+    isEdit: false,
+    firstName: this.props.firstName,
+    lastName: this.props.lastName,
+    email: this.props.email
+  })
 }
 
-  render () {
-    return (
-     <div className='main-user-wrap'>
-      <div className='main-user'>
-          <div> {this.state.spinner} </div>  
+ render () {
+    if (this.state.redirect) {
+      return  <Redirect to='/login' />
+    }
+  return (
+    <div className='main-user-wrap'>
+     <div className='main-user'>
+      <div> {this.state.spinner} </div>  
        <div className='user-content-wrap'>
         <div className='main-wrap'>
          <div className='user-image'>
@@ -85,23 +98,23 @@ componentDidMount() {
            <h1> Hello, {this.state.firstName} </h1>
             <p> Welcome to  you're profile </p>
         {this.state.isEdit && 
-          <p>
+          <span>
           <input className="form-control" type="text"  value={this.state.firstName} onChange={e => this.setState({ firstName: e.target.value })}/> 
           <input className="form-control" type="text"  value={this.state.lastName} onChange={e => this.setState({ lastName: e.target.value })} /> 
           <input className="form-control" type="text"  value={this.state.email} onChange={e => this.setState({ email: e.target.value })}/> 
+          <span className='button-cont'>
           <button onClick={this.editData} className='save'> Save </button>
-          </p>
+          <button onClick={this.backFunc} className='save'> Back </button>
+          </span>
+          </span>
         }    
         {!this.state.isEdit && 
-        <p>
-            
+        <span>
              <div className='div-wrap'> First name: {this.state.firstName}  </div>
              <div className='div-wrap'> Last name: {this.state.lastName}</div>
              <div className='div-wrap'> Email: {this.state.email} </div>
-          
-            
              <img src={edit} alt='edit' onClick={this.changeMod}/> 
-            </p> 
+        </span> 
         }
           </div>
          </div>

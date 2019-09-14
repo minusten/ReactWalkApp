@@ -4,13 +4,13 @@ import { changeStateProp } from '../../actions'
 import UserComponent from './index'
 
 const mapStateToProps = (state) => {
-  console.log(state.main.data)
   return {
     firstName: state.main.data.firstName,
     lastName: state.main.data.lastName,
     email: state.main.data.email,
     token: state.main.data.token,
-    id: state.main.data._id
+    id: state.main.data._id,
+    createdBy: state.main.data.createdBy
   }
 }
 const mapDispatchToProps = (dispatch) => {

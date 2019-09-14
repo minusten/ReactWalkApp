@@ -4,7 +4,6 @@ import { changeStateProp } from '../../actions'
 import Login from './index'
 
 const mapStateToProps = ({ main: { value, email, password, _id } }) => {
-  console.log(_id)
   return {
     value,
     email,

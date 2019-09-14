@@ -12,7 +12,7 @@
 
 }
 .routes-content {
-  padding-top: 100px;
+  padding-top: 50px;
   color: black; 
   height: 100%;
   width: 90%; 
@@ -48,4 +48,64 @@
   font-size: 40px;
   font-weight: bold;
   width: 30%
+}
+.filter {
+  font-size: 30px;
+  font-weight: bold;
+  text-align: start;
+
+}
+.menuButtons {
+  width: 100px;
+  margin-top: 10px;
+  background-color: rgba(168, 142, 119, 0.27);
+  border-radius: 10px;
+  font-weight: 300;
+  font-size: 20px;
+  color: #000;
+  border: none;
+  height: 60px;
+  text-align: center;
+  justify-content: center;
+  display: flex;
+  align-items: flex-start;
+  cursor: pointer;
+  outline: 0 !important;
+  border-bottom: 1px white solid;
+ 
+}
+.menuButtons:hover {
+  background-color: rgba(226, 191, 160, 0.27)
+}
+.menu-items button {
+  width: 200px;
+  background-color: rgba(225, 165, 112, 0.51);
+  font-weight: 300;
+  font-size: 20px;
+  color: #000;
+  border: none;
+  height: 60px;
+  text-align: center;
+  justify-content: center;
+  display: flex;
+  flex-direction: column;
+  /* align-items: flex-start; */
+  cursor: pointer;
+  outline: 0 !important;
+  border-bottom: 1px white solid;
+
+
+}
+.menu-item button:hover {
+  background-color: rgba(226, 191, 160, 0.27)
+}
+.filter-wrap {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  
+}
+.item-wrap {
+  padding: 10px;
+  margin: 0 auto
 }

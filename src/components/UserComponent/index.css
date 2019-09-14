@@ -120,7 +120,7 @@ input {
 .save {
   display: flex;
   justify-content: center;
-  align-items: center
+  align-items: center;
 }
 .spinner {
   height: 100%;
@@ -143,5 +143,8 @@ input {
   margin: 0 auto;
   cursor: pointer;
   height: 40px;
-
+}
+.button-cont {
+  display: flex;
+  justify-content: space-around
 }

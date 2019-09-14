@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
 import './index.css'
+import { Redirect} from 'react-router-dom'
 import { Map, Marker, GoogleApiWrapper, Polyline } from 'google-maps-react'
-import  { ValidatorForm, TextValidator } from 'react-material-ui-form-validator'
+import { ValidatorForm, TextValidator } from 'react-material-ui-form-validator'
 import walk from '../../assets/images/walk.png'
 import car from '../../assets/images/car.png'
 import bicycle from '../../assets/images/bicycle.png'
@@ -9,37 +10,39 @@ import API from '../../utils/api'
 import Spinner from '../Loader'
 import  Modal from 'react-bootstrap/Modal'
 import Button  from 'react-bootstrap/Button'
+import Cookies from 'universal-cookie'
 
+const cookies = new Cookies()
 class AddRoute extends Component {
   constructor(props) {
-      super(props)
-      this.state = {
-        showItem: false,
-        type: '',
-        title: '',                
-        description: '',
-        markers: [],
-        locations: [],
-        propgress: [],
-        polylines: [],
-        spinner: '',
-        show: false,
-        setShow: false,
-        modal: ''
-    }
-}
- handleClose = () => {
-   this.setState({
+   super(props)
+   this.state = {
+    showItem: false,
+    type: '',
+    title: '',                
+    description: '',
+    markers: [],
+    locations: [],
+    propgress: [],
+    polylines: [],
+    spinner: '',
+    show: false,
     setShow: false,
-    show: false
-   })
+    modal: ''
   }
-
- handleShow = () => {
+}
+handleClose = () => {
   this.setState({
-   setShow: true
+  setShow: false,
+  show: false
   })
- }
+}
+
+handleShow = () => {
+  this.setState({
+    setShow: true
+  })
+}
 
 showMenu = (e) => {
   e.preventDefault()
@@ -88,10 +91,6 @@ checkSubmit = () => {
 }
 addRoute = () => {
   if (this.state.title !== '' && this.state.description !== '' && this.state.type !== '' && this.state.polylines.length > 1) {
-    console.log('Good')
-    console.log('title:', this.state.title)
-    console.log(this.state.locations) 
-    console.log(this.state.type) 
     setTimeout(() => {
       this.setState({
         spinner: <div className='spinner'> <Spinner /> </div>
@@ -115,7 +114,6 @@ addRoute = () => {
     show: true,
     modal: <Modal className='modal' show={this.state.show} onHide={this.handleClose}> <Modal.Header closeButton><Modal.Title>Hello</Modal.Title></Modal.Header> <Modal.Body>Please, contain all fields!</Modal.Body> </Modal>
   })
-    console.log(this.state.show) 
   }
 }
 handleMapClick = (ref, map, e) => {
@@ -127,55 +125,67 @@ handleMapClick = (ref, map, e) => {
   }))
     map.panTo(location)
 }
+componentDidMount() {
+  let token  = cookies.get('token')
+  if (!token) {
+    console.log('if')
+    this.setState({
+      redirect: true
+    })
+  }
+}
 
 render() {
+  if (this.state.redirect) {
+    return  <Redirect to='/login' />
+  }
   const style = {width: '80%', height: '610px', borderRadius: '20px'}
   return(  
     <div className='addRoute'>  
       <div className='wrap-routes'> 
       <div> {this.state.spinner} </div>  
       <div>  
-        <Modal className='modal' show={this.state.show} onHide={this.handleClose}>
-         <Modal.Header >
-          <Modal.Title>{this.props.firstName}, </Modal.Title>
-         </Modal.Header>
-         <Modal.Body>Please, contain all fields!</Modal.Body>
-         <Modal.Footer>
-        <Button variant="secondary" onClick={this.handleClose}>Close</Button>
-         </Modal.Footer>
-        </Modal> 
+          <Modal className='modal' show={this.state.show} onHide={this.handleClose}>
+           <Modal.Header>
+            <Modal.Title> {this.props.firstName}, </Modal.Title>
+           </Modal.Header>
+           <Modal.Body> Please, contain all fields! </Modal.Body>
+            <Modal.Footer>
+             <Button variant="secondary" onClick={this.handleClose}> Close </Button>
+            </Modal.Footer>
+          </Modal> 
        </div>
         <div className='map'>
         <Map
-            style={style}
-            onClick={this.handleMapClick}
-            google={this.props.google}
-            zoom={6}
-            initialCenter={{ lat:  49.449635, lng: 32.062827}}         
+          style={style}
+          onClick={this.handleMapClick}
+          google={this.props.google}
+          zoom={6}
+          initialCenter={{ lat:  49.449635, lng: 32.062827}}         
           >
-          {this.state.locations.map((location, i) => {
-            return (
-              <Marker
-                key={i}
-                position={{ lat: location.lat(), lng: location.lng() }}
-                onClick={this.getcurrentLocation}
-              >            
-              </Marker>
-            )
-          })}      
-          <Polyline path={this.state.polylines}       
-            geodesic={true}
-            options={{
-            strokeColor: "#ff2527",
-            strokeOpacity: 0.75,
-            strokeWeight: 2,
-            icons: [
-                {                  
-                  offset: "0",
-                  repeat: "20px"
-                }
-              ]
-            }}
+        {this.state.locations.map((location, i) => {
+          return (
+            <Marker
+              key={i}
+              position={{ lat: location.lat(), lng: location.lng() }}
+              onClick={this.getcurrentLocation}
+            >            
+            </Marker>
+          )
+        })}      
+        <Polyline path={this.state.polylines}       
+          geodesic={true}
+          options={{
+          strokeColor: "#ff2527",
+          strokeOpacity: 0.75,
+          strokeWeight: 2,
+          icons: [
+              {                  
+                offset: "0",
+                repeat: "20px"
+              }
+            ]
+          }}
         />          
         </Map>
         {/* <Geolocation
@@ -185,7 +195,6 @@ render() {
         </div>
         <div className='menu-routes'>
           <p> Create new route </p>
-         
             <ValidatorForm
               onSubmit={this.checkSubmit}
             >
@@ -203,14 +212,14 @@ render() {
               {
                 this.state.showItem
                   ? (
-                      <div className="menu-item" >
-                        <button name='Walk' onClick={() => {this.changeSelect('Walk')}}> <img src={walk} alt='walk' className='add-img'/> </button>
-                        <button name='Bicycle' onClick={()=>{this.changeSelect('Bicycle')}}> <img src={bicycle} alt='bicycle' className='add-img'/> </button>
-                        <button name='Car' onClick={()=>{this.changeSelect('Car')}}> <img src={car} alt='car' className='add-img'/>  </button>                                                 
-                      </div>
+                    <div className="menu-item" >
+                      <button name='Walk' onClick={() => {this.changeSelect('Walk')}}> <img src={walk} alt='walk' className='add-img'/> </button>
+                      <button name='Bicycle' onClick={()=>{this.changeSelect('Bicycle')}}> <img src={bicycle} alt='bicycle' className='add-img'/> </button>
+                      <button name='Car' onClick={()=>{this.changeSelect('Car')}}> <img src={car} alt='car' className='add-img'/>  </button>                                                 
+                    </div>
                   ) : (
-                      null
-                    )
+                    null
+                  )
               }
             <TextValidator               
               label='Description'
@@ -224,9 +233,9 @@ render() {
           <button onClick={this.addRoute} > Add </button>
         </div>
        </div>
-      </div>           
-     )
-   }
+     </div>           
+    )
+  }
 }
 
 AddRoute.displayName = 'AddRoute'

@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { ValidatorForm, TextValidator } from 'react-material-ui-form-validator'
 import Button from '@material-ui/core/Button'
-import { NavLink} from 'react-router-dom'
+import { NavLink } from 'react-router-dom'
 import './index.css';
 import avatar from '../../assets/images/avatar.png'
 import lock from '../../assets/images/lock.png'
@@ -24,7 +24,7 @@ class Login extends Component {
     nameError: false,
     passwordError: false,
     users: [],
-    token: ''
+    tokenSaved: false
 }
 changeFields = (e) => {
   const { formData } = this.state;
@@ -32,12 +32,13 @@ changeFields = (e) => {
   this.setState({ formData })
 }
 login = () => {
-  
   API.login({ email: this.state.formData.email, password: this.state.formData.password})
     .then((response) => {
       this.props.changeStateProp('data', response.data.user, 'main')
-      console.log(response.data.user)
       cookies.set('token', response.data.user.apiKey)
+      this.setState({
+        tokenSaved: true
+      })
       this.props.history.push('/user')
     })   
 }

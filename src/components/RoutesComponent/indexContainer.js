@@ -3,9 +3,10 @@ import { bindActionCreators } from 'redux'
 import { changeStateProp } from '../../actions'
 import Routes from './index'
 
-const mapStateToProps = ({ main: { value } }) => {
+const mapStateToProps = (state) => {
   return {
-    value
+    id: state.main.data._id,
+    createdBy: state.main.data.createdBy
   }
 }
 

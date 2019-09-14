@@ -3,7 +3,7 @@ import { bindActionCreators } from 'redux'
 import { changeStateProp } from '../../actions'
 import Register from './index'
 
-const mapStateToProps = ( state ) => {
+const mapStateToProps = (state) => {
   console.log(state)
   return {
     firstName: state.firstName,
